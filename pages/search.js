@@ -9,7 +9,7 @@ import { useGlobalContext } from "@/context/userContext";
 import Login from "./login";
 import Auth from "@/components/Auth";
 
-const search = () => {
+const Search = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [error, setError] = useState(false);
@@ -102,7 +102,7 @@ const search = () => {
                   return (
                     <>
                       <div
-                        key={ele?._id}
+                        key={idx}
                         className="sm:w-[300px] w-[250px] my-6 h-auto shadow rounded-md flex flex-col gap-6  cursor-pointer "
                       >
                         <div className="">
@@ -173,4 +173,4 @@ const search = () => {
 };
 
 // export default search;
-export default Auth(search);
+export default Auth(Search);

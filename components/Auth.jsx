@@ -4,10 +4,9 @@ import { useGlobalContext } from "@/context/userContext";
 import React, { useEffect } from "react";
 
 const Auth = (WrappedComponent) => {
+  const { auth, isAuthInitialized } = useGlobalContext();
+  const router = useRouter();
   return (props) => {
-    const { auth, isAuthInitialized } = useGlobalContext();
-    const router = useRouter();
-
     // Define routes that don't require authentication
     const noAuthRequiredRoutes = [
       "/reset-password/[id]/[token]",

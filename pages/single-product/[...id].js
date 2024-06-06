@@ -221,9 +221,12 @@ const SingleProduct = ({
             {singleProductData?.images?.length > 1 && (
               <>
                 <div className="flex gap-4 flex-wrap  items-center">
-                  {singleProductData?.images?.map((image) => {
+                  {singleProductData?.images?.map((image, imgIdx) => {
                     return (
-                      <div className="shadow rounded-md p-2  w-[70px]">
+                      <div
+                        className="shadow rounded-md p-2  w-[70px]"
+                        key={imgIdx}
+                      >
                         <img
                           src={image}
                           alt=""

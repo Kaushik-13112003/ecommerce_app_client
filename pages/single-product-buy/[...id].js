@@ -50,9 +50,12 @@ const SingleProductBuy = ({ singleProduct }) => {
                   {singleProduct?.images?.length > 1 && (
                     <>
                       <div className="flex gap-4 flex-wrap  items-center">
-                        {singleProduct?.images?.map((image) => {
+                        {singleProduct?.images?.map((image, idx) => {
                           return (
-                            <div className="shadow rounded-md p-2  w-[70px]">
+                            <div
+                              className="shadow rounded-md p-2  w-[70px]"
+                              key={idx}
+                            >
                               <img
                                 src={image}
                                 alt=""

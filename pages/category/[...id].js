@@ -9,7 +9,7 @@ import { useGlobalContext } from "@/context/userContext";
 import Login from "../login";
 import { IoAddCircleOutline } from "react-icons/io5";
 
-const categoryWiseProducts = ({ allProducts }) => {
+const CategoryWiseProducts = ({ allProducts }) => {
   const { addToCart } = useContext(CartContext);
   const [sortBy, setSortBy] = useState("All");
   const { addProductToWatchList, productIds } = useContext(WatchListContext);
@@ -19,6 +19,13 @@ const categoryWiseProducts = ({ allProducts }) => {
   const [initialProducts, setInitialProducts] = useState(6);
   const [loadMore, setLoadMore] = useState(false);
   const [displayProducts, setDisplayProducts] = useState();
+
+  useEffect(() => {
+    if (allProducts?.length > 0 && allProducts) {
+      setSortedProducts(allProducts?.slice(0, initialProducts));
+      setLoadMore(initialProducts < allProducts?.length);
+    }
+  }, [loadMore, initialProducts]);
 
   //sort products
   useEffect(() => {
@@ -40,13 +47,6 @@ const categoryWiseProducts = ({ allProducts }) => {
   const handleLoadMore = () => {
     setInitialProducts((prev) => prev + 6);
   };
-
-  useEffect(() => {
-    if (allProducts?.length > 0 && allProducts) {
-      setSortedProducts(allProducts?.slice(0, initialProducts));
-      setLoadMore(initialProducts < allProducts?.length);
-    }
-  }, [loadMore, initialProducts]);
 
   return (
     <>
@@ -154,7 +154,7 @@ const categoryWiseProducts = ({ allProducts }) => {
   );
 };
 
-export default categoryWiseProducts;
+export default CategoryWiseProducts;
 
 export async function getServerSideProps(context) {
   const { id } = context.query;

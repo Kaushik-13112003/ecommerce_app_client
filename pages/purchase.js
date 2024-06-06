@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Login from "./login";
 
-const purchase = () => {
+const Purchase = () => {
   const [ok, setOk] = useState(false);
   const { auth } = useGlobalContext();
 
@@ -29,8 +29,6 @@ const purchase = () => {
     );
   }
 
-
-
   if (!auth?.user || !auth?.role || !auth?.token) {
     return <Login />;
   }
@@ -38,4 +36,4 @@ const purchase = () => {
   return <></>;
 };
 
-export default purchase;
+export default Purchase;
