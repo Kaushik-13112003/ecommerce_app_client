@@ -29,9 +29,9 @@ const Purchase = () => {
     );
   }
 
-  if (!auth?.user || !auth?.role || !auth?.token) {
-    return <Login />;
-  }
+  // if (!auth?.user || !auth?.role || !auth?.token) {
+  //   return <Login />;
+  // }
 
   return <></>;
 };
