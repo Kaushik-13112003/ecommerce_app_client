@@ -73,10 +73,10 @@ const Account = () => {
             <div className="h-auto  bg-blue-50">
               {/* <h1 className="text-2xl text-center p-6">Watchlist products</h1> */}
 
+              {allProducts?.length <= 0 && (
+                <p className="text-center py-4">no products in watchlist</p>
+              )}
               <div className="flex  justify-center items-center">
-                {allProducts?.length <= 0 && (
-                  <p className="text-center p-3">no products in watchlist</p>
-                )}
                 <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  p-8 rounded-lg gap-7">
                   {allProducts &&
                     allProducts?.map((ele, idx) => {

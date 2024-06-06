@@ -24,7 +24,9 @@ export default async function handleReviews(req, res) {
 
     if (!id) return;
 
-    let findReviews = await reviewModel.find({ productId: id });
+    let findReviews = await reviewModel
+      .find({ productId: id })
+      .sort({ createdAt: -1 });
 
     return res.json(findReviews);
   }
