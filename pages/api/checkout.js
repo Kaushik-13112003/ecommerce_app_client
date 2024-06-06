@@ -111,8 +111,8 @@ export default async function checkOut(req, res) {
         line_items,
         mode: "payment",
         customer_email: email,
-        success_url: process.env.URL + "/cart?success=true",
-        cancel_url: process.env.URL + "/cart?success=false",
+        success_url: process.env.URL + "/cartPaymentSuccess?success=true",
+        cancel_url: process.env.URL + "/cartPaymentSuccess?success=false",
         metadata: {
           order_Id: newOrder?._id.toString(),
         },
