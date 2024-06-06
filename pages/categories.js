@@ -16,13 +16,13 @@ const Categories = ({ allCategories }) => {
   return (
     <>
       <div className="flex justify-center items-center m-6">
-        <div className="flex flex-wrap gap-6">
+        <div className=" grid sm:grid-cols-3  gap-3 gird-cols-1">
           {allCategories?.map((ele, idx) => {
             return (
               <Link
                 href={`/category/${ele?._id}`}
                 key={ele?._id}
-                className="bg-blue-100 hover:bg-blue-50 p-5 rounded-lg"
+                className="bg-blue-100 hover:bg-blue-50 p-5 rounded-lg sm:w-[200px] w-[70vw] text-center"
               >
                 {ele?.category}
               </Link>
