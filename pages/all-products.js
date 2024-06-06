@@ -54,7 +54,7 @@ const All_products = ({ allProducts }) => {
   return (
     <>
       <div className="h-auto  bg-blue-50">
-        <div className="flex justify-around items-center">
+        <div className="flex justify-around items-center sm:flex-row flex-col gap-4">
           <h1 className="text-2xl text-center p-6">All products</h1>
 
           <select

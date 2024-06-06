@@ -34,7 +34,7 @@ const Cart = () => {
         .post("/api/cart", { ids: cart })
         .then((response) => {
           setCartProducts(response?.data);
-          console.log(response);
+          // console.log(response);
         })
         .catch((err) => {
           console.log(err);

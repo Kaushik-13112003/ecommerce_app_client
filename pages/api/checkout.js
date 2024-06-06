@@ -104,7 +104,9 @@ export default async function checkOut(req, res) {
           order_Id: newOrder?._id.toString(),
         },
       });
-    } else {
+    }
+
+    if (!products?.singleProduct) {
       payment = await stripe.checkout.sessions.create({
         line_items,
         mode: "payment",

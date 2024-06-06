@@ -31,6 +31,8 @@ const Account = () => {
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      setAllProducts([]);
     }
   }, [productIds]);
 
@@ -72,72 +74,76 @@ const Account = () => {
               {/* <h1 className="text-2xl text-center p-6">Watchlist products</h1> */}
 
               <div className="flex  justify-center items-center">
+                {allProducts?.length <= 0 && (
+                  <p className="text-center p-3">no products in watchlist</p>
+                )}
                 <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  p-8 rounded-lg gap-7">
-                  {allProducts?.map((ele, idx) => {
-                    return (
-                      <>
-                        <div
-                          key={ele?._id}
-                          className="sm:w-[300px] w-[250px] my-6 h-auto shadow rounded-md flex flex-col gap-6  cursor-pointer "
-                        >
-                          <div className="">
-                            {ele?.images?.length > 0 && (
-                              <>
-                                <div className="relative ">
-                                  <Link href={`/single-product/${ele?._id}`}>
-                                    <img
-                                      src={ele?.images[0]}
-                                      alt={ele?.name}
-                                      className="sm:w-[300px]   hover:animate-pulse w-[250px] object-contain h-[250px]"
-                                    />
-                                  </Link>
+                  {allProducts &&
+                    allProducts?.map((ele, idx) => {
+                      return (
+                        <>
+                          <div
+                            key={ele?._id}
+                            className="sm:w-[300px] w-[250px] my-6 h-auto shadow rounded-md flex flex-col gap-6  cursor-pointer "
+                          >
+                            <div className="">
+                              {ele?.images?.length > 0 && (
+                                <>
+                                  <div className="relative ">
+                                    <Link href={`/single-product/${ele?._id}`}>
+                                      <img
+                                        src={ele?.images[0]}
+                                        alt={ele?.name}
+                                        className="sm:w-[300px]   hover:animate-pulse w-[250px] object-contain h-[250px]"
+                                      />
+                                    </Link>
 
-                                  <button
-                                    className={`absolute right-2 top-1                                  
+                                    <button
+                                      className={`absolute right-2 top-1                                  
                               ${
                                 productIds?.includes(ele?._id)
                                   ? "text-blue-400"
                                   : "bg-white"
                               }`}
-                                    onClick={() =>
-                                      addProductToWatchList(ele?._id)
-                                    }
-                                  >
-                                    <FavoriteBorderIcon />
-                                  </button>
-                                </div>
-                              </>
-                            )}
-                          </div>
+                                      onClick={() =>
+                                        addProductToWatchList(ele?._id)
+                                      }
+                                    >
+                                      <FavoriteBorderIcon />
+                                    </button>
+                                  </div>
+                                </>
+                              )}
+                            </div>
 
-                          <div className="flex flex-col gap-4 p-4 ">
-                            <h2 className="text-2xl ">{ele?.name}</h2>
-                            <p className="text-blue-600">₹{ele?.price}</p>
+                            <div className="flex flex-col gap-4 p-4 ">
+                              <h2 className="text-2xl ">{ele?.name}</h2>
+                              <p className="text-blue-600">₹{ele?.price}</p>
 
-                            <div className="flex justify-between  gap-3 sm:flex-row flex-col ">
-                              <Link
-                                href={`/single-product/${ele?._id}`}
-                                className="w-[100%]"
-                              >
-                                <button className="bg-blue-200 p-2 w-[100%]  rounded-md hover:bg-blue-100">
-                                  See more
-                                </button>
-                              </Link>
-
-                              <div className="w-[100%]">
-                                <button
-                                  onClick={() => addToCart(ele)}
-                                  className="bg-blue-200 p-2 w rounded-md hover:bg-blue-100  w-[100%]"
+                              <div className="flex justify-between  gap-3 sm:flex-row flex-col ">
+                                <Link
+                                  href={`/single-product/${ele?._id}`}
+                                  className="w-[100%]"
                                 >
-                                  Add to cart
-                                </button>{" "}
+                                  <button className="bg-blue-200 p-2 w-[100%]  rounded-md hover:bg-blue-100">
+                                    See more
+                                  </button>
+                                </Link>
+
+                                <div className="w-[100%]">
+                                  <button
+                                    onClick={() => addToCart(ele)}
+                                    className="bg-blue-200 p-2 w rounded-md hover:bg-blue-100  w-[100%]"
+                                  >
+                                    Add to cart
+                                  </button>{" "}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </>
-                    );
-                  })}
+                        </>
+                      );
+                    })}
                 </div>
               </div>
             </div>
