@@ -17,16 +17,16 @@ const Cart = () => {
   const { cart, addToCart, removeProduct, clearCart } = useContext(CartContext);
   const [cartProducts, setCartProducts] = useState([]);
 
-  // useEffect(() => {
-  //   if (typeof window === undefined) {
-  //     return;
-  //   }
+  useEffect(() => {
+    if (typeof window === undefined) {
+      return;
+    }
 
-  //   if (window.location.href.includes("success=true")) {
-  //     setCartValue(true);
-  //     clearCart();
-  //   }
-  // }, [cart]);
+    if (window.location.href.includes("success=true")) {
+      setCartValue(true);
+      clearCart();
+    }
+  }, [cart]);
 
   useEffect(() => {
     if (cart?.length > 0) {
@@ -61,21 +61,21 @@ const Cart = () => {
   //   return <Login />;
   // }
 
-  // if (cartValue) {
-  //   return (
-  //     <>
-  //       <div className="text-center my-6 shadow-lg p-6">
-  //         <p>Thaks for your payment !!</p>
-  //         <p>we will deliver your order as soon as possible 😊</p>
-  //         <Link href={"/"}>
-  //           <button className="mt-6  bg-orange-200 hover:bg-blue-100 p-2 rounded-lg">
-  //             Go to home
-  //           </button>
-  //         </Link>
-  //       </div>
-  //     </>
-  //   );
-  // }
+  if (cartValue) {
+    return (
+      <>
+        <div className="text-center my-6 shadow-lg p-6">
+          <p>Thaks for your payment !!</p>
+          <p>we will deliver your order as soon as possible 😊</p>
+          <Link href={"/"}>
+            <button className="mt-6  bg-orange-200 hover:bg-blue-100 p-2 rounded-lg">
+              Go to home
+            </button>
+          </Link>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
