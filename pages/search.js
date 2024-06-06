@@ -88,9 +88,7 @@ const Search = () => {
           </form>
         </div>
       </div>
-      {error && (
-        <h1 className="text-2xl text-center p-6">no products found</h1>
-      )}
+      {error && <h1 className="text-2xl text-center p-6">no products found</h1>}
       {searchResult?.length > 0 && (
         <>
           <div className="h-auto  bg-blue-50">
