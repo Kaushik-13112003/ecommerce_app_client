@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Moon+Dance&family=Rajdhani:wght@300&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik+Doodle+Shadow&family=Rubik+Maps&family=Seymour+One&display=swap");
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.greet {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
