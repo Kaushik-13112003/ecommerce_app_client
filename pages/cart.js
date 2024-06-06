@@ -17,20 +17,20 @@ const Cart = () => {
   const { cart, addToCart, removeProduct, clearCart } = useContext(CartContext);
   const [cartProducts, setCartProducts] = useState([]);
 
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+  // useEffect(() => {
+  //   if (typeof window === "undefined") {
+  //     return;
+  //   }
 
-    if (window.location.href.includes("success=true")) {
-      setCartValue(true);
-      clearCart();
-    }
+  //   if (window.location.href.includes("success=true")) {
+  //     setCartValue(true);
+  //     clearCart();
+  //   }
 
-    if (window.location.href.includes("success=false")) {
-      setCartValue(false);
-    }
-  }, [cart]);
+  //   if (window.location.href.includes("success=false")) {
+  //     setCartValue(false);
+  //   }
+  // }, [cart]);
 
   useEffect(() => {
     if (cart?.length > 0) {
@@ -60,32 +60,32 @@ const Cart = () => {
     addToCart(ele);
   };
 
-  if (cartValue !== null) {
-    if (cartValue) {
-      return (
-        <div className="text-center my-6 shadow-lg p-6">
-          <p>Thanks for your payment !!</p>
-          <p>We will deliver your order as soon as possible 😊</p>
-          <Link href={"/"}>
-            <button className="mt-6 bg-orange-200 hover:bg-blue-100 p-2 rounded-lg">
-              Go to home
-            </button>
-          </Link>
-        </div>
-      );
-    } else {
-      return (
-        <div className="text-center my-6 shadow-lg p-6">
-          <p>Something went wrong 😔!! Try again !!</p>
-          <Link href={"/"}>
-            <button className="mt-6 bg-orange-200 hover:bg-blue-100 p-2 rounded-lg">
-              Go to Cart
-            </button>
-          </Link>
-        </div>
-      );
-    }
-  }
+  // if (cartValue !== null) {
+  //   if (cartValue) {
+  //     return (
+  //       <div className="text-center my-6 shadow-lg p-6">
+  //         <p>Thanks for your payment !!</p>
+  //         <p>We will deliver your order as soon as possible 😊</p>
+  //         <Link href={"/"}>
+  //           <button className="mt-6 bg-orange-200 hover:bg-blue-100 p-2 rounded-lg">
+  //             Go to home
+  //           </button>
+  //         </Link>
+  //       </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div className="text-center my-6 shadow-lg p-6">
+  //         <p>Something went wrong 😔!! Try again !!</p>
+  //         <Link href={"/"}>
+  //           <button className="mt-6 bg-orange-200 hover:bg-blue-100 p-2 rounded-lg">
+  //             Go to Cart
+  //           </button>
+  //         </Link>
+  //       </div>
+  //     );
+  //   }
+  // }
 
   return (
     <div className="text-center my-5">

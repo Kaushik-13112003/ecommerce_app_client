@@ -17,7 +17,7 @@ const OrderInfoandPayment = ({ cartData }) => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
 
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
 
   //   handlePayment
   const handlePayment = async (event) => {
@@ -51,6 +51,10 @@ const OrderInfoandPayment = ({ cartData }) => {
       });
 
       if (res.data?.url) {
+        // if (!cartData[0]?.quantity) {
+        //   clearCart();
+        // }
+
         window.location = res?.data?.url;
       } else {
         toast.error("something went wrong !!");

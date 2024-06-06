@@ -97,10 +97,10 @@ export default async function checkOut(req, res) {
     let payment;
     const successUrl = products?.singleProduct
       ? `${process.env.URL}/purchase?success=true`
-      : `${process.env.URL}/cart?success=true`;
+      : `${process.env.URL}/cartpayment?success=true`;
     const cancelUrl = products?.singleProduct
       ? `${process.env.URL}/purchase?success=false`
-      : `${process.env.URL}/cart?success=false`;
+      : `${process.env.URL}/cartpayment?success=false`;
 
     if (products?.singleProduct) {
       payment = await stripe.checkout.sessions.create({
