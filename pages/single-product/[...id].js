@@ -229,7 +229,7 @@ const SingleProduct = ({
                       >
                         <img
                           src={image}
-                          alt=""
+                          alt={singleProductData?.name}
                           onClick={() => setisActive(image)}
                           className="w-[100%] hover:animate-pulse    cursor-pointer"
                         />

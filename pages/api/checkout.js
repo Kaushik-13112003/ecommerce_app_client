@@ -2,7 +2,7 @@ import { connectDB } from "@/lib/mongoose";
 import orderModel from "@/model/orderModel";
 import productModel from "@/model/productModel";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-console.log(stripe);
+// console.log(stripe);
 
 export default async function checkOut(req, res) {
   if (req?.method !== "POST") {
@@ -29,7 +29,7 @@ export default async function checkOut(req, res) {
 
     if (products.singleProduct) {
       let singleProduct = products?.singleProduct[0];
-      console.log(singleProduct);
+      // console.log(singleProduct);
 
       let findProduct = await productModel.findOne({
         _id: singleProduct?.singleProductId,
@@ -54,7 +54,7 @@ export default async function checkOut(req, res) {
     if (!products.singleProduct) {
       let joinProductIds = products;
       let findUniqId = [...new Set(joinProductIds)];
-      console.log(findUniqId);
+      // console.log(findUniqId);
 
       let findProducts = await productModel.find({ _id: findUniqId });
 
@@ -92,27 +92,34 @@ export default async function checkOut(req, res) {
     });
 
     //single product
+    // let payment;
+
     let payment;
+    const successUrl = products?.singleProduct
+      ? `${process.env.URL}/purchase?success=true`
+      : `${process.env.URL}/cart?success=true`;
+    const cancelUrl = products?.singleProduct
+      ? `${process.env.URL}/purchase?success=false`
+      : `${process.env.URL}/cart?success=false`;
+
     if (products?.singleProduct) {
       payment = await stripe.checkout.sessions.create({
         line_items,
         mode: "payment",
         customer_email: email,
-        success_url: process.env.URL + "/purchase?success=true",
-        cancel_url: process.env.URL + "/purchase?success=false",
+        success_url: successUrl,
+        cancel_url: cancelUrl,
         metadata: {
           order_Id: newOrder?._id.toString(),
         },
       });
-    }
-
-    if (!products?.singleProduct) {
+    } else {
       payment = await stripe.checkout.sessions.create({
         line_items,
         mode: "payment",
         customer_email: email,
-        success_url: process.env.URL + "/cart?success=true",
-        cancel_url: process.env.URL + "/cart?success=false",
+        success_url: successUrl,
+        cancel_url: cancelUrl,
         metadata: {
           order_Id: newOrder?._id.toString(),
         },
