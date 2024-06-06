@@ -27,7 +27,7 @@ const CartProvider = ({ children }) => {
       return [...prev, product?._id];
     });
 
-    // toast.success("product added to cart");
+    toast.success("product added to cart");
   };
 
   const removeProduct = (product) => {
@@ -35,7 +35,7 @@ const CartProvider = ({ children }) => {
 
     setCart((prev) => {
       let position = prev.indexOf(product?._id);
-      console.log(position);
+      // console.log(position);
 
       if (position !== -1) {
         return prev.filter((pid, idx) => {
@@ -44,6 +44,8 @@ const CartProvider = ({ children }) => {
       }
       return prev;
     });
+
+    toast.success("product removed from cart ");
   };
 
   const clearCart = () => {

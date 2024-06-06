@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const { createContext, useState, useEffect } = require("react");
 
 const WatchListContext = createContext();
@@ -10,8 +12,10 @@ const WatchListProvider = ({ children }) => {
 
     if (productIds.includes(product_id)) {
       allWatchListProductsIds = productIds.filter((pid) => pid !== product_id);
+      toast.success("product removed from watchlist ");
     } else {
       allWatchListProductsIds = [...productIds, product_id];
+      toast.success("product added to watchlist ");
     }
     setProductIds(allWatchListProductsIds);
     if (allWatchListProductsIds) {
