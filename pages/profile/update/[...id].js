@@ -273,7 +273,7 @@ const UpdateProfile = ({ userData }) => {
                 />
               </div>
             </div>
-            <button className="bg-blue-200 p-2 w-[100%]  rounded-md hover:bg-blue-50">
+            <button className="bg-blue-200 p-2 w-[100%]  rounded-md hover:bg-blue-100">
               Update
             </button>{" "}
           </form>
