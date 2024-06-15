@@ -34,9 +34,12 @@ const ResetPassword = () => {
         body: JSON.stringify({ password, confirmPassword, id, token }),
       });
       let dataFromResponse = await res.json();
-
+      console.log(dataFromResponse);
       if (dataFromResponse?.expire) {
-        setGoError(true);
+        // setGoError(true);
+        toast.error("token expired !! try again");
+
+        window.location.href = "/forgot-password";
         return;
       }
       if (res.ok) {
@@ -44,6 +47,7 @@ const ResetPassword = () => {
         setGoHome(true);
       } else {
         toast.error(dataFromResponse?.msg);
+        setGoHome(false);
       }
     } catch (err) {
       console.log(err);
@@ -54,11 +58,9 @@ const ResetPassword = () => {
     router.push("/login");
   }
 
-  useEffect(() => {
-    if (goError) {
-      router.push("/not-found");
-    }
-  }, [goError]);
+  // if (goError) {
+  //   router.push("/not-found");
+  // }
 
   return (
     <>
