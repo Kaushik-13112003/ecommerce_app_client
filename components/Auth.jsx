@@ -48,7 +48,6 @@
 
 // export default Auth;
 
-
 import { useRouter } from "next/router";
 import { useGlobalContext } from "@/context/userContext";
 import React, { useEffect } from "react";
@@ -64,6 +63,8 @@ const Auth = (WrappedComponent) => {
       "/reset-password/[id]/[token]",
       "/forgot-password",
       "/register",
+      "/purchase",
+      "/cartpayment",
     ];
 
     useEffect(() => {
@@ -97,7 +98,9 @@ const Auth = (WrappedComponent) => {
   };
 
   // Set a display name for the HOC for better debugging
-  AuthComponent.displayName = `Auth(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  AuthComponent.displayName = `Auth(${
+    WrappedComponent.displayName || WrappedComponent.name || "Component"
+  })`;
 
   return AuthComponent;
 };
