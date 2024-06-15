@@ -38,31 +38,30 @@ export default async function forgotPassword(req, res) {
       return res.status(400).json({ msg: "User not found" });
     }
 
-    // Generate token
+    //generate token
     const token = jwt.sign({ _id: isExist?._id }, process.env.TOKEN, {
       expiresIn: "120s",
     });
+    console.log(token);
 
     const setUserToken = await userInfoModel.findByIdAndUpdate(
       { _id: isExist?._id },
       { verifyToken: token },
       { new: true }
     );
+    console.log(setUserToken, "set");
 
     if (setUserToken) {
-      // Construct reset password URL
-      const resetPasswordLink = `https://ecommercefront-81ht988ez-kaushiks-projects-611a0910.vercel.app/reset-password/${setUserToken._id}/${setUserToken.verifyToken}`;
-
       const mailOptions = {
         from: "developerbuddy1311@gmail.com",
         to: email,
         subject: "Reset Your Password on buyNow.com",
         html: `
-         <p>Dear ${setUserToken.name},</p>
+         <p>Dear ${setUserToken?.name},</p>
          <p>We received a request to reset your password for your buyNow.com account. If you did not request a password reset, please ignore this email. Your password will not change.</p>
          <p>To reset your password, please click the link below:</p>
-         <a href="${resetPasswordLink}"> Click here to reset password </a>
-         <p>For your security, this link will expire after one-time access. If you need a new link, you can request another password reset on the buyNow.com website.</p>
+         <a href=http://localhost:3000/reset-password/${setUserToken?._id}/${setUserToken?.verifyToken}> Click here to reset password </a>
+         <p>For your security, this link will expire after one time access. If you need a new link, you can request another password reset on the buyNow.com website.</p>
          <p>If you have any issues or did not request this change, please contact our support team at support@buyNow.com.</p>
          <p>Best regards,</p>
          <p>The buyNow.com Team</p>
@@ -74,47 +73,90 @@ export default async function forgotPassword(req, res) {
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
           console.log(err);
-          return res
-            .status(401)
-            .json({ msg: "Email not sent. Please try again." });
+          return res.status(401).json({ msg: "email not sent !! try again" });
         } else {
-          return res.status(200).json({ msg: "Email sent successfully." });
+          return res.status(200).json({ msg: "email sent" });
         }
       });
     }
+
+    // if (token) {
+    //   let addTokenToUserData = await userInfoModel.findByIdAndUpdate(
+    //     { _id: setUserToken?._id },
+    //     { verifyToken: token },
+    //     { new: true }
+    //   );
+
+    //   if (addTokenToUserData) {
+    //     const mailOptions = {
+    //       from: "developerbuddy1311@gmail.com", // Use your verified SendGrid sender email
+    //       to: email,
+    //       subject: "Reset Your Password on buyNow.com",
+    //       html: `
+    //      <p>Dear ${isExist?.name},</p>
+    //      <p>We received a request to reset your password for your buyNow.com account. If you did not request a password reset, please ignore this email. Your password will not change.</p>
+    //      <p>To reset your password, please click the link below:</p>
+    //      <a href=http://localhost:3000/reset-password/${isExist?._id}/${addTokenToUserData?.verifyToken}"> Click here to reset password </a>
+    //      <p>For your security, this link will expire after one time access. If you need a new link, you can request another password reset on the buyNow.com website.</p>
+    //      <p>If you have any issues or did not request this change, please contact our support team at support@buyNow.com.</p>
+    //      <p>Best regards,</p>
+    //      <p>The buyNow.com Team</p>
+    //      <hr>
+    //      <p>buyNow.com<br>Your go-to platform for the best deals online.</p>
+    //      `,
+    //     };
+
+    //     transporter.sendMail(mailOptions, (err, info) => {
+    //       if (err) {
+    //         console.log(err);
+    //         return res.status(401).json({ msg: "email not sent !! try again" });
+    //       } else {
+    //         return res.status(200).json({ msg: "email sent" });
+    //       }
+    //     });
+    //   }
+
+    //   return res.json("ok");
+    // }
 
     return res.json("ok");
   }
 
   if (method === "PUT") {
     let { password, id, token } = req.body;
+    // console.log(password, id, token);
 
     try {
       const validUser = await userInfoModel.findOne({
         _id: id,
         verifyToken: token,
       });
+      console.log(validUser, " ----");
+      // return res.json(validUser);
 
-      if (!validUser) {
-        return res.json({ expire: "Token expired or invalid." });
+      if (validUser == null) {
+        return res.json({ expire: "token expired" });
       }
 
       const verifyToken = jwt.verify(token, process.env.TOKEN);
+      4;
 
       if (verifyToken && validUser) {
+        // console.log(verifyToken);
+
         const newPassword = await bcrypt.hash(password, 10);
+        // console.log(newPassword + " new");
         const updatePassword = await userInfoModel.findByIdAndUpdate(
           { _id: id },
           { password: newPassword }
         );
 
         if (updatePassword) {
-          const updateToken = await userInfoModel.findByIdAndUpdate(
+          const updatePassword = await userInfoModel.findByIdAndUpdate(
             { _id: id },
             { verifyToken: null }
           );
-
-          return res.json("Password updated successfully.");
+          return res.json("password updated successfully !! ");
         }
       }
     } catch (err) {

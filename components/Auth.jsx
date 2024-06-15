@@ -63,8 +63,6 @@ const Auth = (WrappedComponent) => {
       "/reset-password/[id]/[token]",
       "/forgot-password",
       "/register",
-      "/purchase",
-      "/cartpayment",
     ];
 
     useEffect(() => {
