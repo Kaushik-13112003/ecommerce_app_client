@@ -1,9 +1,10 @@
 import nodemailer from "nodemailer";
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-import userInfoModel, { validate } from "@/model/userInfoModel";
-import { connectDB } from "@/lib/mongoose";
 import { ContactPageSharp } from "@mui/icons-material";
+import { connect } from "mongoose";
+import userInfoModel from "@/model/userInfoModel";
+import { connectDB } from "@/lib/mongoose";
 
 export default async function forgotPassword(req, res) {
   let { method } = req;
