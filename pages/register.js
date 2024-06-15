@@ -205,7 +205,7 @@ const Register = () => {
             <div className="flex flex-col gap-3 p-2 ">
               <label htmlFor=" password">Password</label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 placeholder="xyz"
                 className="bg-blue-200 rounded-lg p-2"
