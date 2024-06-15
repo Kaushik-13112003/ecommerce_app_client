@@ -51,7 +51,7 @@ export default async function forgotPassword(req, res) {
 
     if (setUserToken) {
       // Construct reset password URL
-      const resetPasswordLink = `${process.env.URL}/reset-password/${setUserToken._id}/${setUserToken.verifyToken}`;
+      const resetPasswordLink = `https://ecommercefront-81ht988ez-kaushiks-projects-611a0910.vercel.app/reset-password/${setUserToken._id}/${setUserToken.verifyToken}`;
 
       const mailOptions = {
         from: "developerbuddy1311@gmail.com",

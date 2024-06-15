@@ -96,11 +96,11 @@ export default async function checkOut(req, res) {
 
     let payment;
     const successUrl = products?.singleProduct
-      ? `${process.env.URL}/purchase?success=true`
-      : `${process.env.URL}/cartpayment?success=true`;
+      ? `https://ecommercefront-81ht988ez-kaushiks-projects-611a0910.vercel.app/purchase?success=true`
+      : `https://ecommercefront-81ht988ez-kaushiks-projects-611a0910.vercel.app/cartpayment?success=true`;
     const cancelUrl = products?.singleProduct
-      ? `${process.env.URL}/purchase?success=false`
-      : `${process.env.URL}/cartpayment?success=false`;
+      ? `https://ecommercefront-81ht988ez-kaushiks-projects-611a0910.vercel.app/purchase?success=false`
+      : `https://ecommercefront-81ht988ez-kaushiks-projects-611a0910.vercel.app/cartpayment?success=false`;
 
     if (products?.singleProduct) {
       payment = await stripe.checkout.sessions.create({
